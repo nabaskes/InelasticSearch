@@ -73,7 +73,7 @@ public:
 
   TextCorpus(const char* filename, bool is_file) {
     // people may decide to specifically tell you it's not a file
-    if (is_file) {
+    if (!is_file) {
       my_text = filename;
     } else {
 

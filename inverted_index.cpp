@@ -40,7 +40,6 @@ int main() {
 
   TextCorpus richard("richard_2.txt", true);
   richard.set_name("Richard II");
-  cout << richard.get_text();
   TextCorpus sonnets ("the_sonnets.txt", true);
   sonnets.set_name("The Sonnets");
   TextCorpus merchant ("merchant_of_venice.txt", true);
@@ -55,23 +54,33 @@ int main() {
   index.add_corpus(&pericles);
 
   vector<TextCorpus*> thou = index.get_matching_corpuses("thou");
-  vector<TextCorpus*> romeo = index.get_matching_corpuses("Romeo");
-
+  vector<TextCorpus*> shylock = index.get_matching_corpuses("Shylock");
+  vector<TextCorpus*> scooby = index.get_matching_corpuses("Scooby");
 
   vector<TextCorpus*>::iterator it;
   cout << "thou:\n";
   unsigned count = 0;
   for(it=thou.begin(); it != thou.end(); it++) {
-    printf("%d", count);
+    printf("%d ", count);
     cout << (*it)->get_name();
     cout << "\n";
     count++;
   }
   cout << "\n";
-  cout << "Romeo:\n";
+  cout << "Shylock:\n";
   count = 0;
-  for(it=romeo.begin(); it!=romeo.end(); it++) {
-    printf("%d", count);
+  for(it=shylock.begin(); it!=shylock.end(); it++) {
+    printf("%d ", count);
+    cout << (*it)->get_name();
+    cout << "\n";
+    count++;
+  }
+
+  cout << "\n";
+  cout << "Scooby:\n";
+  count =0;
+  for(it=scooby.begin(); it!=scooby.end(); it++) {
+    printf("%d ", count);
     cout << (*it)->get_name();
     cout << "\n";
     count++;
