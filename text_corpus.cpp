@@ -7,6 +7,17 @@ using namespace std;
 #include <cctype>
 #include <fstream>
 
+string trim(const string& str)
+{
+    size_t first = str.find_first_not_of(' ');
+    if (string::npos == first)
+    {
+        return str;
+    }
+    size_t last = str.find_last_not_of(' ');
+    return str.substr(first, (last - first + 1));
+}
+
 class TextCorpus {
   string my_text;
   map<string, unsigned> word_count;
@@ -25,16 +36,20 @@ class TextCorpus {
     while (ind < my_text.length()) {
 
       // get the next word
-      next = my_text.find(' ', ind);
+      next = my_text.find(' ', ind+1);
       if (next == -1) {
 	next = my_text.length();
       }
-      temp = my_text.substr(ind, next - ind);
+      temp = trim(my_text.substr(ind, next - ind));
       my_words.push_back(temp);
 
 
       // increment the word count
-      word_count[temp] = (word_count.find(temp) == word_count.end()) ? 1 : word_count[temp] + 1;
+      if(word_count.find(temp) == word_count.end()) {
+	word_count[temp] = 1;
+      } else {
+	word_count[temp] += 1;
+      }
 
       // track the word in the index
       if (index.find(temp) == index.end()) {
@@ -48,7 +63,6 @@ class TextCorpus {
       // start looking for the next word
       ind = next;
     }
-
   }
 
 public:
@@ -72,6 +86,7 @@ public:
 	string temp(line);
 	my_text.append(temp);
       }
+      fclose(f);
     }
     build_index();
   }

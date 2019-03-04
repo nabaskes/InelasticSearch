@@ -37,8 +37,10 @@ public:
 
 
 int main() {
+
   TextCorpus richard("richard_2.txt", true);
   richard.set_name("Richard II");
+  cout << richard.get_text();
   TextCorpus sonnets ("the_sonnets.txt", true);
   sonnets.set_name("The Sonnets");
   TextCorpus merchant ("merchant_of_venice.txt", true);
@@ -54,6 +56,7 @@ int main() {
 
   vector<TextCorpus*> thou = index.get_matching_corpuses("thou");
   vector<TextCorpus*> romeo = index.get_matching_corpuses("Romeo");
+
 
   vector<TextCorpus*>::iterator it;
   cout << "thou:\n";
